@@ -4,11 +4,13 @@
 1. Pre-requisitos 
 2. Instalación [webmin](http://www.webmin.com/)
 3. Tomcat 8.5
+4. MariaDB
 
 ## Pre-requisitos
 
 - Nano
 - Openjdk
+- Software-Properties-Common
 
 ### Nano
 
@@ -28,6 +30,12 @@ Instalamos el openjdk
 Comprobamos la versión
 
 	java -version
+
+### Software-properties-common	
+
+Para agregar repositorios fácilmente con un comando (en este caso sirve en el paso de MariaDb)
+
+	sudo apt-get install software-properties-common
 
 ## Instalación webmin
 
@@ -85,4 +93,83 @@ Una vez instalado nos vamos a:
 
 	-> Servidores
 	-> Apache Tomcat
+	
 Si todo fue **ok** debería estar funcionando perfectamente.
+
+## MariaDb
+Podemos instalar MariaDb desde los repositorios de ubuntu o los propios de MariaDb, recomiendo esto último para obtener la ultima versión.
+
+#### Repositorio ubuntu
+Para instalar desde el repositorio de ubuntu escribimos
+
+	sudo apt update
+	sudo apt install mariadb-server
+
+#### Repositorio MariaDB
+Agregamos la clave de confianza
+
+	sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+
+Agregamos el repositorio
+
+	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.3/ubuntu bionic main'
+
+Si recibe un mensaje de error que dice **add-apt-repository command not found** instalaremos **software-properties-common** (ver pre-requisitos)
+
+Actualizar e instalar
+
+	sudo apt update
+	sudo apt install mariadb-server
+
+#### Comandos de verificación
+
+Verificación de inicio
+
+	sudo systemctl status mariadb
+
+Versión
+
+	mysql -V
+
+### Ajustes webmin
+
+El módulo de webmin ya viene preinstalado pero posiblemente tengamos que cambiar el path del fichero de configuración ya que por defecto coge el de Mysql y no el de MariaDb
+
+Nos dirigimos a 
+
+	-> Un-usedmodules
+	-> Mysql Database Server
+Si nos aparece un cartel como el siguiente, es que tenemos que cambiar la ruta
+
+	The MySQL config file /etc/mysql/mariadb.cnfs was not found on your system. Use the module configuration page to set the correct path.
+
+Para ello
+
+	-> Pulsamos la rueda dentada
+	-> System configuration
+	-> MySQL configuration file
+	
+	Cambiamos el path por:
+	
+	/etc/mysql/mariadb.cnf
+
+### Configuración segura
+
+Ejecutamos el  comando `mysql_secure_installation` para mejorar la seguridad de la instalación de MariaDB donde nos pedirá contraseña nueva de root y restringiremos a un solo dominio la conexión:
+
+	sudo mysql_secure_installation
+
+Para entrar desde cualquier dominio el host debe ser
+
+	%
+Otros comandos utiles
+
+
+SELECT * FROM mysql.user
+  
+	CREATE USER 'nombre_usuario'@'ip_o_host' IDENTIFIED BY 'mi_clave';
+
+	//comando de solo select insert delete
+	GRANT SELECT ON * . * TO 'nombre_usuario'@'%';
+	GRANT INSERT ON * . * TO 'nombre_usuario'@'%';
+	GRANT DELETE ON * . * TO 'nombre_usuario'@'%';
