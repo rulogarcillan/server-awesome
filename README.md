@@ -2,12 +2,12 @@
 ### Primeros pasos Ubuntu 18
 
 1. [Pre-requisitos](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#pre-requisitos)
-2. [Instalación webmin](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Instalación webmin)
-3. Ftp
-4. Tomcat 8.5
-5. MariaDB
-6. Nginx
-7. Certificados SSL para Nginx con Let’s Encrypt
+2. [Instalación webmin](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#instalaci%C3%B3n-webmin)
+3. [Ftp](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Ftp)
+4. [Tomcat 8.5](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Ftp)
+5. [MariaDB](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#MariaDB)
+6. [Nginx](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Nginx)
+7. [Certificados SSL para Nginx con Let’s Encrypt](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Ftp)
 
 ## Pre-requisitos
 
