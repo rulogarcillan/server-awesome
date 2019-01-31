@@ -155,7 +155,13 @@ Para ello
 
 ### Configuración segura
 
-Ejecutamos el  comando `mysql_secure_installation` para mejorar la seguridad de la instalación de MariaDB donde nos pedirá contraseña nueva de root y restringiremos a un solo dominio la conexión:
+Por defecto la bbdd solo escucha en localhost, hay que abrirla al exterior:
+
+	-> MySQL Server Configuration
+	-> MySQL server listening address 
+	-> Any
+
+Ejecutamos el  comando `mysql_secure_installation` para mejorar la seguridad de la instalación de MariaDB donde nos pedirá contraseña nueva de root:
 
 	sudo mysql_secure_installation
 
@@ -165,7 +171,7 @@ Para entrar desde cualquier dominio el host debe ser
 Otros comandos utiles
 
 
-SELECT * FROM mysql.user
+	SELECT * FROM mysql.user
   
 	CREATE USER 'nombre_usuario'@'ip_o_host' IDENTIFIED BY 'mi_clave';
 
@@ -173,3 +179,4 @@ SELECT * FROM mysql.user
 	GRANT SELECT ON * . * TO 'nombre_usuario'@'%';
 	GRANT INSERT ON * . * TO 'nombre_usuario'@'%';
 	GRANT DELETE ON * . * TO 'nombre_usuario'@'%';
+	
