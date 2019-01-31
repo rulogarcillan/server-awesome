@@ -3,13 +3,15 @@
 
 1. Pre-requisitos 
 2. Instalación [webmin](http://www.webmin.com/)
-3. Tomcat 8.5
-4. MariaDB
+3. Ftp
+4. Tomcat 8.5
+5. MariaDB
+6. Nginx
 
 ## Pre-requisitos
 
-- Crear un nuevo user root (opcional)
 - Nano
+- Nuevo usuario root (opcional)
 - Openjdk
 - Software-Properties-Common
 
@@ -90,6 +92,21 @@ Instalamos webmin
 Si la instalación ha ido correcta podemos acceder a nuestro panel
 
 	https://your_server_ip:10000 
+	
+## Ftp
+
+1.  En el buscador busca FTP.
+2.  Selecciona: ProFTPD
+3.  Haga clic en Instalar módulo en el caso de que no lo tengas instalado.
+4.  En la barra lateral izquierda, después de la instalación, haga clic en  **Refresh Modules**
+5.  Haga clic en Crear un nuevo usuario, que se encuentra en Sistema -> Usuarios y grupos
+6.  Proporcionar un  **nombre de usuario para lo que debe ser su cuenta de FTP**.
+7.  Seleccione Contraseña normal y proporcione una contraseña única y compleja para la cuenta.
+8.  Si quieres puedes escoger un directorio o carpeta personal personalizado.
+9.  Seleccione  **Nuevo grupo con el mismo nombre**  que el usuario y dale a  **Crear**.
+
+Una vez hecho esto, deberías poder acceder desde FTP con el nombre de usuario y la contraseña que pusistes, utilizando la dirección IP de su servidor como host.  
+Recuerda que si has cambiado de puerto SFTP tendrás que poner el nuevo puerto.
 
 ## Tomcat 8.5
 
@@ -108,7 +125,7 @@ Con el servidor levantado si entramos en la siguiente ip nos aparecera la bienve
 
 	https://your_server_ip:8080
 
-### [Plugin](https://github.com/AcuGIS/Tomcat-Webmin-Module) tomcat para webmin
+### [Modulo](https://github.com/AcuGIS/Tomcat-Webmin-Module) tomcat para webmin
 
 Nos dirigimos a:
 		
@@ -207,4 +224,46 @@ Otros comandos utiles
 	GRANT SELECT ON * . * TO 'nombre_usuario'@'%';
 	GRANT INSERT ON * . * TO 'nombre_usuario'@'%';
 	GRANT DELETE ON * . * TO 'nombre_usuario'@'%';
+	
+## Nginx
+
+### Instalación del servidor
+
+Me he basado en el siguiente [link](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04#step-5-setting-up-server-blocks-(recommended))
+
+Instalamos
+
+	sudo apt update
+	sudo apt install nginx
+
+Comprobamos el servicio
+
+	systemctl status nginx
+
+Accedemos a la ip de nuestro servidor para comprobar el mensaje de bienvenida
+
+	http://85.214.22.45/
+
+Comandos de interes
+
+	sudo systemctl stop nginx
+	sudo systemctl start nginx
+	sudo systemctl restart nginx
+	sudo systemctl reload nginx
+	sudo systemctl disable nginx
+	sudo systemctl enable nginx
+	
+### [Modulo](https://www.justindhoffman.com/project/nginx-webmin-module) nginx para webmin
+
+Nos dirigimos a:
+		
+	-> webmin configuration
+	-> Módulos de webmin
+	-> Install from ... ** Desde dirección URL ftp o http **
+	-> https://www.justindhoffman.com/sites/justindhoffman.com/files/nginx-0.11.wbm_.gz
+
+Una vez instalado nos vamos a:
+
+	-> Servidores
+	-> Nginx webserver
 	
