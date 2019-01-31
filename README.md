@@ -7,7 +7,7 @@
 4. [Tomcat 8.5](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#tomcat-85)
 5. [MariaDB](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#MariaDB)
 6. [Nginx](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Nginx)
-7. [Certificados SSL para Nginx con Let’s Encrypt](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Ftp)
+7. [Certificados SSL para Nginx con Let’s Encrypt](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#certificados-ssl-para-nginx-con-lets-encrypt)
 
 ## Pre-requisitos
 
