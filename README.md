@@ -142,6 +142,62 @@ Una vez instalado nos vamos a:
 	
 Si todo fue **ok** debería estar funcionando perfectamente.
 
+### Redirección de puerto tomcat (importante)
+
+Para completar esta parte es necesario haber terminado de instalar **nginx** y los certificados **ssl**.
+
+Vamos a redirigir todo el tráfico que entra por el puerto **8080**, **80** y **443** (ssl) de un subdominio que hemos creado en nuestro panel donde hemos contratado el dominio y redirigido a nuestra ip del servidor. 
+
+Ejemplo de subdominio
+~~~
+ "api.mi_dominio.com"
+~~~
+
+Esto nos servirá para tener en el mismo servidor una pagina web (en el dominio principal)  y multiples api rest (en el subdominio) y todo desde llamadas al puerto de navegación **8080**, **80** y **443** (ssl) que serán redirigidas al puerto del tomcat.
+
+Vamos a ello, desde el panel de webmin nos vamos a:
+
+1. **Configuración tomcat**
+
+	-> Servidores
+	-> Apache Tomcat
+	-> Edit config
+	-> /etc/tomcat8/server.xml
+
+Buscamos la linea donde se configura el conector ya la cambiamos por la siguiente:
+
+	     <Connector port="8080" protocol="HTTP/1.1"
+	                connectionTimeout="20000"
+	                redirectPort="8443"
+	     	        proxyName="localhost"
+	                proxyPort="443"
+	                scheme="https"/>
+	                
+Salvamos el fichero y reiniciamos tomcat
+
+	sudo service tomcat8 stop
+	sudo service tomcat8 start
+	
+2. **Configuración nginx**
+
+		-> Servidores
+		-> Nginx webserver
+		-> Editamos el server name que queramos usar para nuestro tomcat, en mi caso "api.tuppersoft.com"
+
+Agregamos la siguiente linea al final dentro de la primera cadena de "server"
+
+	location /nombre_de_mi_api/ {
+        	proxy_pass http://api.tuppersoft.com:8080/nombre_de_mi_api/;
+        	proxy_set_header  X-Real-IP  $remote_addr;
+        	proxy_set_header  Host  $http_host;
+    }
+  El nombre de tu api suele ser el nombre de tu fichero **WAR**
+
+Y nada más, ahora para llamar a mi api basta con usar la ruta y ella sola ira a **tomcat** con certificado **ssl**
+api.tuppersoft.com/nombre_de_mi_api/
+
+
+
 ## MariaDb
 Podemos instalar MariaDb desde los repositorios de ubuntu o los propios de MariaDb, recomiendo esto último para obtener la ultima versión.
 
