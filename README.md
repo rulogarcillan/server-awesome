@@ -8,6 +8,7 @@
 
 ## Pre-requisitos
 
+- Crear un nuevo user root (opcional)
 - Nano
 - Openjdk
 - Software-Properties-Common
@@ -21,6 +22,33 @@ Abrimos un terminal y nos conectamos por **ssh** al servidor
 Vamos a instalar el editor de texto **nano**
 
 	sudo apt-get install nano
+
+### Nuevo usuario root
+
+**Crear usuario**
+
+Ejecutamos , nos pedirá  el password a crear
+
+	sudo adduser nombre_usuario
+
+Editamos el fichero para dar permisos sudo
+		
+	sudo /usr/sbin/visudo
+		
+Escribimos en la linea debajo de root
+
+	root            ALL=(ALL:ALL) ALL 
+	nombre_usuario	ALL=(ALL:ALL) ALL
+
+**Cambiar pass**
+
+	sudo passwd nombreusuario
+
+**Eliminar usuario**
+
+	sudo userdel nombreusuario
+	
+		
 
 ### Openjdk
 Instalamos el openjdk
