@@ -266,4 +266,39 @@ Una vez instalado nos vamos a:
 
 	-> Servidores
 	-> Nginx webserver
+
+### Host virtuales
+
+Vamos a crear varios host virtuales para redirigir el trafico a la pagina que corresponda en función del dominio o subdominio que ha hecho la petición web:
+
+	sudo mkdir -p /var/www/nombre_dominio.com/html	
+	sudo chown -R $USER:$USER /var/www/nombre_dominio.com/html
+	sudo chmod -R 755 /var/www/nombre_dominio.com
 	
+Editamos el fichero para agregar la configuración
+
+	sudo nano /etc/nginx/sites-available/nombre_dominio.com
+
+Agregamos la siguiente configuración cambiando por nuestro nombre de dominio
+
+	server {
+	        listen 80;
+	        listen [::]:80;
+
+	        root /var/www/nombre_dominio.com/html;
+	        index index.html index.htm;
+
+	        server_name nombre_dominio.com www.nombre_dominio.com;
+
+	        location / {
+	                try_files $uri $uri/ =404;
+	        }
+	}
+
+Agregamos un enlace simbolico
+
+	sudo ln -s /etc/nginx/sites-available/nombre_dominio.com /etc/nginx/sites-enabled/
+
+Y reiniciamos nginx
+	
+	sudo systemctl restart nginx
