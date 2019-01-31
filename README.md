@@ -2,7 +2,7 @@
 ### Primeros pasos Ubuntu 18
 
 1. [Pre-requisitos](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#pre-requisitos)
-2. Instalación [webmin](http://www.webmin.com/)
+2. [Instalación webmin](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#Instalación webmin)
 3. Ftp
 4. Tomcat 8.5
 5. MariaDB
@@ -68,7 +68,7 @@ Para agregar repositorios fácilmente con un comando (en este caso sirve en el p
 
 	sudo apt-get install software-properties-common
 
-## Instalación webmin
+## Instalación [webmin](http://www.webmin.com/)
 
 Editamos el siguiente archivo con nuestro editor de texto
 
