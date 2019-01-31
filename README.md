@@ -7,6 +7,7 @@
 4. Tomcat 8.5
 5. MariaDB
 6. Nginx
+7. Certificados SSL para Nginx con Let’s Encrypt
 
 ## Pre-requisitos
 
@@ -301,4 +302,28 @@ Agregamos un enlace simbolico
 
 Y reiniciamos nginx
 	
-	sudo systemctl restart nginx
+	sudo systemctl restart nginxç
+
+## Certificados SSL para Nginx con Let’s Encrypt
+
+Me he basado en el siguiente [link](https://www.digitalocean.com/community/tutorials/como-asegurar-nginx-con-let-s-encrypt-en-ubuntu-18-04-es)
+
+Instalamos cerbot
+
+	sudo add-apt-repository ppa:certbot/certbot
+	sudo apt update
+	sudo apt install python-certbot-nginx
+	
+Como hemos configurado nginx anteriormente cerbot será capaz de buscar nuestra configuración.
+Ejecutamos cerbot con los dominios y subdominios que queramos generar un certificado ssl
+
+	sudo certbot --nginx -d tuppersoft.com -d www.tuppersoft.com -d api.tuppersoft.com -d info.tuppersoft.com
+
+- Seguimos los pasos del bot, indicando el correo electrónico para que nos avisen en caso de que el certificado esté apunto de caducar.
+- Seleccionamos **"si"** a la re-dirección en caso de que queramos que todo el tráfico vaya por ssl (muy recomendado).
+
+Una vez finalizado el proceso el propio bot nos ha generado una tarea cron en nuestro SO para que cada 12 horas pregunte por la caducidad del certificado y en caso de quedar poco para caducar se renueva solo.
+
+Si queremos hacerlo manualmente basta con ejecutar
+
+	sudo certbot renew --dry-run
