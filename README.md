@@ -1,7 +1,7 @@
 # Preparación de entorno
 ### Primeros pasos Ubuntu 18
 
-1. Pre-requisitos 
+1. [Pre-requisitos](https://github.com/rulogarcillan/server-awesome/blob/master/README.md#pre-requisitos)
 2. Instalación [webmin](http://www.webmin.com/)
 3. Ftp
 4. Tomcat 8.5
