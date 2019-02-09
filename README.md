@@ -280,6 +280,7 @@ Otros comandos utiles
 	//comando de solo select insert delete
 	GRANT SELECT ON * . * TO 'nombre_usuario'@'%';
 	GRANT INSERT ON * . * TO 'nombre_usuario'@'%';
+	GRANT UPDATE ON * . * TO 'nombre_usuario'@'%';
 	GRANT DELETE ON * . * TO 'nombre_usuario'@'%';
 	
 ## Nginx
