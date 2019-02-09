@@ -20,7 +20,7 @@
 
 Abrimos un terminal y nos conectamos por **ssh** al servidor
 
-	ssh root@h2701747.stratoserver.net
+	ssh root@tu_ip_del_servidor
 
 Vamos a instalar el editor de texto **nano**
 
