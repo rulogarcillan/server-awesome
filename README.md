@@ -300,7 +300,7 @@ Comprobamos el servicio
 
 Accedemos a la ip de nuestro servidor para comprobar el mensaje de bienvenida
 
-	http://85.214.22.45/
+	http://tu_ip_del_servidor/
 
 Comandos de interes
 
